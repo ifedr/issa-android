@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Issa</string>
+    <string name="login">Код абонента:</string>
+    <string name="password">Пароль:</string>
+    <string name="go">Проверить баланс</string>
+    
+    <string name="current_balance">Текущий баланс:</string>
+    <string name="refresh">Обновить</string>
+
+</resources>
