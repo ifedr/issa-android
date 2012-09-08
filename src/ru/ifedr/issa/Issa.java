@@ -1,8 +1,9 @@
 package ru.ifedr.issa;
 
-
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,34 +13,69 @@ import java.util.*;
 import java.net.*;
 
 public class Issa extends Activity implements OnClickListener {
-
+	EditText etLogin, etPassword;
+	Button btnStart;
+	CheckBox cbRemember;
+	
+	SharedPreferences sPref;
+	
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        Button goButton = (Button)findViewById(R.id.go_button);
-        goButton.setOnClickListener(this);
+        btnStart = (Button) findViewById(R.id.btnStart);
+        btnStart.setOnClickListener(this);
+        
+        etLogin = (EditText) findViewById(R.id.etLogin);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        cbRemember = (CheckBox) findViewById(R.id.cbRemember);
+        
+        loadData();
     }
     
+	@Override
+    protected void onDestroy() {
+		saveData( cbRemember.isChecked() );
+        super.onDestroy();
+      }
+	
+	@Override
     public void onClick(View v) {
-        EditText loginValue = (EditText)findViewById(R.id.login_value);
-        EditText passwordValue = (EditText)findViewById(R.id.password_value);
-        
-		try 
-		{
-			int l = Integer.parseInt(loginValue.getText().toString());
-			String p = passwordValue.getText().toString();
-			String balance = new IssaHelper(l, p).getBalance();
-		
-			Intent intent = new Intent(this, Balance.class);
-			intent.putExtra(Balance.KEY_BALANCE, balance);
-			startActivity(intent);
-		} 
-		catch (NumberFormatException e) 
-		{
-			System.err.println("Логин должен быть числом.");
-			System.exit(1);
-		}
+    	switch(v.getId()) {
+    	case R.id.btnStart:
+			try {
+				int l = Integer.parseInt(etLogin.getText().toString());
+				String p = etPassword.getText().toString();
+				String balance = new IssaHelper(l, p).getBalance();
+				Toast.makeText(this, balance, Toast.LENGTH_SHORT).show();
+			} catch (NumberFormatException e) {
+				System.err.println("Логин должен быть числом.");
+				System.exit(1);
+			}
+			break;
+    	}
+    }
+    
+    private void saveData(boolean remember) {
+    	sPref = getPreferences(MODE_PRIVATE);
+    	Editor edit = sPref.edit();
+    	if (remember) {
+	        edit.putString("KEY_LOGIN", etLogin.getText().toString());
+	        edit.putString("KEY_PASSWORD", etPassword.getText().toString());
+    	} else {
+    		edit.clear();
+    	}
+        edit.commit();
+
+    }
+    
+    private void loadData() {
+    	sPref = getPreferences(MODE_PRIVATE);
+    	String login = sPref.getString("KEY_LOGIN", "");
+    	String password = sPref.getString("KEY_PASSWORD", "");
+    	etLogin.setText(login);
+    	etPassword.setText(password);
     }
     
     // Original class from Kevin http://www.kamzilla.ru/forum/106-10372-111167-16-1290944697

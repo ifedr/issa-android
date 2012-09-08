@@ -13,7 +13,7 @@
         android:layout_gravity="center" />
 
     <EditText
-        android:id="@+id/login_value"
+        android:id="@+id/etLogin"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="number">
@@ -30,15 +30,22 @@
         android:layout_gravity="center" />
 
     <EditText
-        android:id="@+id/password_value"
+        android:id="@+id/etPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword" />
 
+    <CheckBox
+        android:id="@+id/cbRemember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remember"
+        android:checked="true"/>
+
     <Button
-        android:id="@+id/go_button"
+        android:id="@+id/btnStart"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/go" />
+        android:text="@string/start" />
 
 </LinearLayout>
