@@ -48,4 +48,11 @@
         android:layout_height="wrap_content"
         android:text="@string/start" />
 
+    <TextView
+        android:id="@+id/tvBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"        
+        android:text="@string/current_balance" />
+
 </LinearLayout>

@@ -16,6 +16,7 @@ public class Issa extends Activity implements OnClickListener {
 	EditText etLogin, etPassword;
 	Button btnStart;
 	CheckBox cbRemember;
+	TextView tvBalance;
 	
 	SharedPreferences sPref;
 	
@@ -30,6 +31,7 @@ public class Issa extends Activity implements OnClickListener {
         etLogin = (EditText) findViewById(R.id.etLogin);
         etPassword = (EditText) findViewById(R.id.etPassword);
         cbRemember = (CheckBox) findViewById(R.id.cbRemember);
+        tvBalance = (TextView) findViewById(R.id.tvBalance);
         
         loadData();
     }
@@ -49,6 +51,8 @@ public class Issa extends Activity implements OnClickListener {
 				String p = etPassword.getText().toString();
 				String balance = new IssaHelper(l, p).getBalance();
 				Toast.makeText(this, balance, Toast.LENGTH_SHORT).show();
+				tvBalance.setText(R.string.current_balance);
+				tvBalance.append(balance);
 			} catch (NumberFormatException e) {
 				System.err.println("Логин должен быть числом.");
 				System.exit(1);

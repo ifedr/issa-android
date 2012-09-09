@@ -4,7 +4,7 @@
     <string name="login">Код абонента:</string>
     <string name="password">Пароль:</string>
     <string name="start">Проверить баланс</string>
-    <string name="current_balance">Текущий баланс:</string>
+    <string name="current_balance">Текущий баланс: </string>
     <string name="refresh">Обновить</string>
     <string name="account">Аккаунт</string>
     <string name="remember">Запомнить</string>
